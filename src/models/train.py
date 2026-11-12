@@ -6,7 +6,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from src.preprocessing import create_preprocessor
 
-def train_model(X_train , y_train):
+def train_models(X_train , y_train):
 
     preprocessor = create_preprocessor(X_train)
 
@@ -15,17 +15,17 @@ def train_model(X_train , y_train):
 
         "Logistic Regression": Pipeline(steps=[
             ("preprocessor", preprocessor),
-            ("classifier"), LogisticRegression(max_iter=1000)
+            ("classifier", LogisticRegression(max_iter=1000))
         ]),
 
         "KNN": Pipeline(steps=[
             ("preprocessor" ,preprocessor),
-            ("classifier" KNeighborsClassifier())
+            ("classifier" ,KNeighborsClassifier())
         ]),
 
         "Random Forest": Pipeline(steps=[
             ("preprocessor" ,preprocessor),
-            ("classifier" RandomForestClassifier(random_state=42))
+            ("classifier" ,RandomForestClassifier(random_state=42))
         ])
 
     }
@@ -58,13 +58,13 @@ def train_model(X_train , y_train):
     grid_results = {}
 
 
-    for name , Pipeline in models.items():
+    for name , pipeline in models.items():
         grid_search = GridSearchCV(
-            estimator=Pipeline,
+            estimator=pipeline,
             param_grid=params_grids[name],
             cv=cv,
-            scoring="f1_scoring",
-            n_jobs=-1
+            scoring="f1_macro",
+            n_jobs=1
         )
 
         grid_search.fit(X_train, y_train)

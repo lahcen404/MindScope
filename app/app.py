@@ -28,7 +28,7 @@ ID = "Student_ID"
 FEATURES = df.drop(columns=[ID, TARGET]).columns.tolist()
 
 # 2. Page configuration
-st.set_page_config(page_title="MindScope", page_icon="🧠")
+st.set_page_config(page_title="MindScope")
 
 st.title("MindScope")
 st.write("Student Mental Health Risk Prediction")

@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 
-from src.preprocessing import create_preprocessor
+from src.preprocessing.preprocessor import create_preprocessor
 
 def train_models(X_train , y_train):
 
